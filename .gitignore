@@ -1,0 +1,10 @@
+# Ignore Python bytecode files
+*.pyc
+
+# Ignore virtual environment folders
+venv/
+env/
+
+# Ignore any build artifacts or local settings
+.vscode/
+.idea/
