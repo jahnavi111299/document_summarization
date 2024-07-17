@@ -10,7 +10,7 @@ import torch
 # Model and tokenizer loading
 model_path = "LaMini-Flan-T5-248M"
 tokenizer = T5Tokenizer.from_pretrained(model_path)
-base_model = T5ForConditionalGeneration.from_pretrained(model_path, local_files_only=True, device_map='auto', torch_dtype=torch.float32)
+base_model = T5ForConditionalGeneration.from_pretrained(model_path, local_files_only=False, device_map='auto', torch_dtype=torch.float32)
 
 # File loader and preprocessing
 def file_preprocessing(file):
