@@ -1,14 +1,14 @@
 import streamlit as st
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain_community.document_loaders import PyPDFLoader, DirectoryLoader
+from langchain.document_loaders import PyPDFLoader
 from transformers import T5Tokenizer, T5ForConditionalGeneration, pipeline
 from rouge_score import rouge_scorer
 import base64
 import os
-import torch 
+import torch
 
 # Model and tokenizer loading
-model_path = "./document_summarization/LaMini-Flan-T5-248M"
+model_path = "./LaMini-Flan-T5-248M"  # Relative path to the model directory
 tokenizer = T5Tokenizer.from_pretrained(model_path)
 base_model = T5ForConditionalGeneration.from_pretrained(model_path, local_files_only=True, device_map='auto', torch_dtype=torch.float32)
 
@@ -61,6 +61,7 @@ def main():
     if uploaded_file is not None:
         if st.button("Summarize"):
             col1, col2 = st.columns(2)
+            os.makedirs("data", exist_ok=True)  # Ensure the 'data' directory exists
             filepath = os.path.join("data", uploaded_file.name)
             with open(filepath, "wb") as temp_file:
                 temp_file.write(uploaded_file.read())
